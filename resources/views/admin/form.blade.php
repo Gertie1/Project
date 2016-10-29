@@ -5,6 +5,7 @@
     <head>
 
         <meta name="_token" content="{!! csrf_token() !!}"/>
+
         <script src="../resources/assets/assets/plugins/bootstrap/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.6_js_bootstrap.min.js"></script>
         <script src="../resources/assets/assets/plugins/jquery/http_ajax.googleapis.com_ajax_libs_jquery_1.12.0_jquery.min.js"></script>
 
@@ -57,7 +58,12 @@
 
     </div>
 
-    <script>
+    <script type="text/javascript">
+                $.ajaxSetup({
+                    headers:{
+                        'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+                    }
+                })
 
     </script>
 

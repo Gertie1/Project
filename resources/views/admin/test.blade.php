@@ -56,3 +56,30 @@ $diseases->drugs()->sync($request->input('drugs', []));
 $diseases->save();
 $drugs->save();
 $item->drugs = implode(',', Input::get('drugs'));
+
+
+------------------------------------------------------------
+//An array that will contain the IDs of posts that have already
+//been appended.
+var displayedPosts = new Array();
+
+//Function to get feed.
+function getFeed() {
+$.ajax({
+type: "GET",
+url: "api.php",
+dataType: 'json',
+success: function(data) {
+var posts = data.posts
+$.each(posts, function(i) {
+//Make sure that this post hasn't already been added.
+if($.inArray(posts[i].id, displayedPosts) === -1){
+//Store the ID of the post so that we don't add it again.
+displayedPosts.push(posts[i].id);
+//Append
+$('#posts').append("<div class='post' id='" + posts[i].id + "'>" + "<div class='content'>" + posts[i].post + "</div>" + "<div class='meta'><div class='d'>" + posts[i].time + "</div> - <a href='/edit/" + posts[i].id +"'>Edit</a> - <a href='destroy.php?id=" + posts[i].id + "'>Delete</a></div></div>");
+}
+});
+}
+});
+}

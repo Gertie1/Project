@@ -54,8 +54,13 @@ Route::group(['middleware'=>'auth'],function (){
 
     Route::get('/charts',array('as'=>'charts','uses'=>'PredictionController@highcharts'));
 
-    Route::get('/form',array('as'=>'form','uses'=>'Disease_DrugController@form'));
-    Route::get('/mapping',array('as'=>'mapping','uses'=>'Disease_DrugController@mapping'));
+    Route::get('/form2',array('as'=>'form2','uses'=>'Disease_DrugController@form'));
+    Route::post('/mapping',array('as'=>'mapping','uses'=>'Disease_DrugController@mapping'));
+    Route::get('/display',array('as'=>'display','uses'=>'DisplayController@display'));
+   // Route::get('/getDisplayUpdate',array('as'=>'getDisplayUpdate','uses'=>'DisplayController@getDisplayUpdate'));
+
+    Route::get('/editMapping{id}',array('as'=>'editMapping','uses'=>'DisplayController@editMapping'));
+    Route::patch('/updateMapping{id}',array('as'=>'updateMapping','uses'=>'DisplayController@updateMapping'));
 
 });
 

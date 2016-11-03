@@ -5,8 +5,8 @@
     <head>
 
         <meta name="_token" content="{!! csrf_token() !!}"/>
-        <script src="../resources/assets/assets/plugins/bootstrap/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.6_js_bootstrap.min.js"></script>
-        <script src="../resources/assets/assets/plugins/jquery/http_ajax.googleapis.com_ajax_libs_jquery_1.12.0_jquery.min.js"></script>
+
+
 
     </head>
     <body>
@@ -83,20 +83,19 @@
     </div>
 
 
-
+    <script src="../resources/assets/assets/plugins/jquery/http_ajax.googleapis.com_ajax_libs_jquery_1.12.0_jquery.min.js"></script>
+    <script src="../resources/assets/assets/plugins/bootstrap/http_maxcdn.bootstrapcdn.com_bootstrap_3.3.6_js_bootstrap.min.js"></script>
     <script type="text/javascript">
         $.ajaxSetup({
             headers:{
                 'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
             }
         })
-
         $("#add").on('click', function () {
             $('#save').val('save');
             $('#frmDisease').trigger('reset');
             $("#item").modal('show');
         });
-
         $('#frmDisease').on('submit',function(e){
             e.preventDefault();
             var form=$('#frmDisease');
@@ -125,14 +124,11 @@
                     else{
                         $('#item'+data.id).replaceWith(row);
                     }
-
                     $('#frmDisease').trigger('reset');
                     $('#name').focus();
                 }
-
             });
         })
-
         function addRow(data) {
             var row='<tr>'+
                     '<td>'+ data.id +'</td>' +
@@ -142,7 +138,6 @@
                     '</tr>';
             $('tbody').append(row);
         }
-
         $('tbody').delegate('.btn-edit','click',function () {
             var value=$(this).data('id');
             var url='{{URL::to('getDiseaseUpdate')}}';
@@ -157,12 +152,9 @@
                     $('#name').val(data.name);
                     $('#save').val('update');
                     $('#item').modal('show');
-
                 }
             });
-
         });
-
         $('tbody').delegate('.btn-delete','click',function(){
             var value=$(this).data('id');
             var url='{{URL::to('deleteDisease')}}';
@@ -175,11 +167,9 @@
                     success:function(data){
                         $('#item'+value).remove();
                     }
-
                 });
             }
         });
-
         $('#search').on('keyup',function(){
             $value=$(this).val();
             $.ajax({
@@ -188,19 +178,9 @@
                 data:{'search':$value},
                 success:function (data) {
                     $('tbody').html(data);
-
                 }
             });
         })
-
-
-
-
-
-
-
-
-
     </script>
     </body>
     </html>

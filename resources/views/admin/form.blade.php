@@ -21,37 +21,56 @@
             <!--End Page header-->
         </div>
 
-            <div class="container">
+        <div class="container">
 
-                <div class="row">
+            <div class="row">
 
-                            <div class="panel-body">
-                                <form role="form" method="post" action="{{ URL::route('mapping') }}">
-                                    <div class="form-group">
-                                        <label>Disease</label>
-                                        <select class="form-inline input-sm " name="disease" id="disease">
-                                            @foreach($diseases as $key => $disease)
-                                                <option value="{{$disease->id}}"> {{$disease->name}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Drugs</label><br>
-                                        @foreach($drugs as $key=>$drug)
-                                            <input type="hidden" name="drug[]" value="0" />
-                                            <input class="checkbox-inline" type="checkbox" name="drug[]" value="{{ $drug->id }}" id="{{ $drug->id }}">{{ $drug->name }} <br>
-                                        @endforeach
+                <div class="panel-body">
+                    {{--<form role="form" method="post" action="{{ URL::route('mapping') }}" id="frmMapping">--}}
+                    {!! Form::model($item,
+                     [
+                     'method' => 'PATCH',
+                     'route' => ['updateMapping', $item->id]
 
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
 
-                                </form>
-                            </div>
+]) !!}
 
+
+                    {{ csrf_field() }}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="form-group">
+                        <label>Disease</label>
+                        <select class="form-inline input-sm " name="disease" id="disease">
+                            <option value="{{$disease->id}}"> {{$disease->name}}</option>
+                           {{-- @foreach($diseases as $key => $disease)
+                                <option value="{{$disease->id}}"> {{$disease->name}}</option>
+                            @endforeach--}}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Drugs</label><br>
+                        @foreach($drugs as $key=>$drug)
+                            <input type="hidden" name="drug[]" value="0" />
+
+                            <input class="checkbox-inline" type="checkbox" name="drug[]" value="{{ $drug->id }}" id="{{ $drug->id }}"
+                                   @foreach($checked_drugs as $key=>$checked_drug)
+                                   @if ($checked_drug == $drug->id)
+                                   checked
+                                   @endif
+                                    @endforeach
+                            >{{ $drug->name }} <br>
+                        @endforeach
+
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                    </form>
                 </div>
+
             </div>
+        </div>
 
 
 
@@ -59,11 +78,11 @@
     </div>
 
     <script type="text/javascript">
-                $.ajaxSetup({
-                    headers:{
-                        'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
-                    }
-                })
+        $.ajaxSetup({
+            headers:{
+                'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
+            }
+        })
 
     </script>
 

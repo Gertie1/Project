@@ -17,18 +17,32 @@
 
         </div>
 
+        <form action="{{ URL::route('charts') }}" method="post" id="">
+            {{ csrf_field() }}
 
-        <?php echo json_encode($chartArray); ?>
+            <div class="form-group">
+                <input type="number" class="form-control" id="year" name="year" placeholder="Enter year">
+            </div>
+            <input type="submit" value="Save" id="save" class="btn btn-primary">
+
+
+        </form>
+
+
+
+
+
+       {{-- <?php echo json_encode($chartArray); ?>--}}
 
     </div>
-    <script>
+  {{--  <script>
         $(function() {
             $('#container').highcharts(
                     <?php echo json_encode($chartArray); ?>
             )
         });
 
-    </script>
+    </script>--}}
 
 
 

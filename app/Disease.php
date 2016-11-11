@@ -15,5 +15,8 @@ class Disease extends Model
 
     public $timestamps=false;
 
-
+    public function disease_drug()
+    {
+        return $this->belongsTo('App\Disease_Drug');
+    }
 }

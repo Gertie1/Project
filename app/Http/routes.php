@@ -62,5 +62,16 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/editMapping{id}',array('as'=>'editMapping','uses'=>'DisplayController@editMapping'));
     Route::patch('/updateMapping{id}',array('as'=>'updateMapping','uses'=>'DisplayController@updateMapping'));
 
+    Route::get('/stock',array('as'=>'stock','uses'=>'StockController@stocks'));
+    Route::get('/stockr',array('as'=>'stockr','uses'=>'StockController@newStock'));
+    Route::post('/newStock',array('as'=>'newStock','uses'=>'StockController@addNewStock'));
+    Route::post('/deleteStock',array('as'=>'deleteStock','uses'=>'StockController@deleteStock'));
+    Route::get('/editStock{id}',array('as'=>'editStock','uses'=>'StockController@editStock'));
+    Route::patch('/updateStock{id}',array('as'=>'updateStock','uses'=>'StockController@updateStock'));
+
+    Route::get('/blank',array('as'=>'blank','uses'=>'ChartController@display'));
+    Route::post('/blank2',array('as'=>'blank2','uses'=>'ChartController@highcharts'));
+
+
 });
 

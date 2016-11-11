@@ -48,14 +48,17 @@
                 <a href="{!! URL::route('diseases') !!}"><i class="fa fa-table fa-fw"></i>Diseases</a>
             </li>
             <li>
-                <a href="{!! URL::route('form2') !!}"><i class="fa fa-table fa-fw"></i>Form</a>
+                <a href="{!! URL::route('form2') !!}"><i class="fa fa-table fa-fw"></i>Mapping</a>
             </li>
             <li>
                 <a href="{!! URL::route('display') !!}"><i class="fa fa-table fa-fw"></i>Display</a>
             </li>
-            {{--<li>
+            <li>
                 <a href="{!! URL::route('charts') !!}"><i class="fa fa-table fa-fw"></i>Charts</a>
-            </li>--}}
+            </li>
+            <li>
+                <a href="{!! URL::route('stock') !!}"><i class="fa fa-table fa-fw"></i>Stock</a>
+            </li>
             {{--<li>
                 <a href="{!! URL::route('buttons') !!}"><i class="fa fa-edit fa-fw"></i>Buttons</a>
             </li>--}}

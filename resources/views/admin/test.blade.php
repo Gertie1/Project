@@ -83,3 +83,42 @@ $('#posts').append("<div class='post' id='" + posts[i].id + "'>" + "<div class='
 }
 });
 }
+
+
+/*      $insert = array();
+foreach ($input as $key=> $input)
+{
+foreach($input['drug'] as $key => $drug) {
+$insert[$key]['drug'] = $drug;
+}
+foreach($input['amount_received'] as $key => $amount_received) {
+$insert[$key]['amount_received'] = $amount_received;
+
+}
+}*/
+
+/* Stock::insert($insert);*/
+/* $item = Stock::create([
+'drug_id' =>  $drug,
+'amount_received' => $amount_received,
+
+]);
+$item->save();*/
+
+/*$drug = Input::get('drug');
+$amount_received = Input::get('amount_received');
+$n=0;
+/*dd($drug);*/
+/*dd($amount_received);
+
+/* foreach($drug as $key => $n )
+{
+
+$arrData[] = array(
+"amount_received"       => $amount_received[$key],
+"drug_id"       => $drug[$key],
+
+);
+
+}
+Stock::create( $arrData );*/

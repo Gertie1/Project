@@ -29,17 +29,38 @@
 
         <div class="row">
             <!--quick info section -->
-            <div class="col-lg-6">
-                <div class="alert alert-danger text-center">
-                    <i class="fa fa-credit-card fa-3x"></i>&nbsp;<b>20 </b>Drugs rarely sold
 
-                </div>
+               {{-- <div class="col-lg-3">
+                    <button class="alert alert-danger text-center">
+                        <i class="fa fa-credit-card fa-3x"></i>&nbsp;<b>27 % </b>Drugs sold often
+                    </button>
+                </div>--}}
+
+            <div class="col-lg-3">
+                <a href="{{ URL::route('often') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i>  Drugs sold often
+                </a>
             </div>
-            <div class="col-lg-6">
-                <div class="alert alert-success text-center">
+
+            <div class="col-lg-3">
+                <a href="{{ URL::route('none') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i> Drugs out of Stock
+                </a>
+            </div>
+
+            <div class="col-lg-3">
+                <a href="{{ URL::route('rarely') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i> Drugs rarely sold
+                </a>
+            </div>
+
+            <div class="col-lg-3">
+                <a href="{{ URL::route('likely') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i>  Drugs likely to be on demand
+                </a>
+            </div>
+
+           {{-- <div class="col-lg-3">
+                <button class="alert alert-success text-center">
                     <i class="fa  fa-lightbulb-o fa-3x"></i>&nbsp;<b>27 % </b>Drugs sold often
-                </div>
-            </div>
+                </button>
+            </div>--}}
 
             <!--end quick info section -->
         </div>

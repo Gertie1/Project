@@ -122,3 +122,10 @@ $arrData[] = array(
 
 }
 Stock::create( $arrData );*/
+
+
+@if ( session()->has('Success') ) <div class="alert alert-success" role="alert">
+
+
+
+    @if (!$errors->isEmpty()) <div class="alert alert-danger" role="alert"> <strong>Errors:</strong> <ul> @foreach($errors->all() as $error) <li>{{ $error }}</li> @endforeach </ul> </div> @endif

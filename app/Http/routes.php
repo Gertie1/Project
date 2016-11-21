@@ -72,6 +72,12 @@ Route::group(['middleware'=>'auth'],function (){
     Route::get('/blank',array('as'=>'blank','uses'=>'ChartController@display'));
     Route::post('/blank2',array('as'=>'blank2','uses'=>'ChartController@highcharts'));
 
+    Route::get('/often',array('as'=>'often','uses'=>'StockController@often'));
+    Route::post('/often',array('as'=>'often','uses'=>'StockController@often'));
+    Route::get('/none',array('as'=>'none','uses'=>'StockController@display'));
+    Route::get('/rarely',array('as'=>'rarely','uses'=>'StockController@display'));
+    Route::get('/likely',array('as'=>'likely','uses'=>'StockController@display'));
+
 
 });
 

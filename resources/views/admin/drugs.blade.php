@@ -97,7 +97,7 @@
             headers:{
                 'X-CSRF-TOKEN':$('meta[name="_token"]').attr('content')
             }
-        })
+        });
 
         $("#add").on('click', function () {
             $('#save').val('save');
@@ -144,7 +144,7 @@
                 }
 
             });
-        })
+        });
 
         function addRow(data) {
             var row='<tr>'+

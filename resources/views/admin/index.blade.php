@@ -37,22 +37,22 @@
                 </div>--}}
 
             <div class="col-lg-3">
-                <a href="{{ URL::route('often') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i>  Drugs sold often
+                <a href="{{ URL::route('often') }}" class="alert alert-success text-center"><i class="fa fa-thumbs-up fa-3x"></i>  Drugs sold often
                 </a>
             </div>
 
             <div class="col-lg-3">
-                <a href="{{ URL::route('none') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i> Drugs out of Stock
+                <a href="{{ URL::route('none') }}" class="alert alert-danger text-center"><i class="fa fa-stop fa-3x"></i> Drugs out of Stock
                 </a>
             </div>
 
             <div class="col-lg-3">
-                <a href="{{ URL::route('rarely') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i> Drugs rarely sold
+                <a href="{{ URL::route('rarely') }}" class="alert alert-danger text-center"><i class="fa fa-warning fa-3x"></i> Drugs rarely sold
                 </a>
             </div>
 
             <div class="col-lg-3">
-                <a href="{{ URL::route('likely') }}" class="alert alert-success text-center"><i class="fa fa-credit-card fa-3x"></i>  Drugs likely to be on demand
+                <a href="{{ URL::route('likely') }}" class="alert alert-success text-center"><i class="fa fa-barcode fa-3x"></i> Drugs to be stocked
                 </a>
             </div>
 

@@ -74,9 +74,22 @@ Route::group(['middleware'=>'auth'],function (){
 
     Route::get('/often',array('as'=>'often','uses'=>'StockController@often'));
     Route::post('/often',array('as'=>'often','uses'=>'StockController@often'));
-    Route::get('/none',array('as'=>'none','uses'=>'StockController@display'));
-    Route::get('/rarely',array('as'=>'rarely','uses'=>'StockController@display'));
+    Route::get('/none',array('as'=>'none','uses'=>'StockController@none'));
+    Route::post('/none',array('as'=>'none','uses'=>'StockController@none'));
+    Route::get('/rarely',array('as'=>'rarely','uses'=>'StockController@rarely'));
+    Route::post('/rarely',array('as'=>'rarely','uses'=>'StockController@rarely'));
     Route::get('/likely',array('as'=>'likely','uses'=>'StockController@display'));
+
+   Route::get('/trial',array('as'=>'trial','uses'=>'HavenController@init'));
+
+    /*Route::get('/trial',array('as'=>'trial', function() {
+        include_once(app_path() . '/libraries/havenondemand/HODClient1.php');
+        return View::make('demo.LineChartTest');
+    }));*/
+
+   /* Route::get('/trial', function () {
+        return view('admin.trial');
+    });*/
 
 
 });

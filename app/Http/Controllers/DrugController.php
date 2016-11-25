@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Drug;
 use Illuminate\Support\Facades\DB;
+use Session;
 
 class DrugController extends Controller
 {
@@ -25,8 +26,13 @@ class DrugController extends Controller
 
     public function newDrug(Request $request){
         if($request->ajax()){
+            $this->validate($request,array(
+                'name'=>'required'
+            ));
+
             $item = Drug::create($request->all());
             $item->save();
+            Session::flash("success","Created");
             return response()->json($item);
         }
     }

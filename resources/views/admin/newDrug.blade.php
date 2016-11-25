@@ -15,22 +15,26 @@
                 <form action="{{ URL::route('newDrug') }}" method="post" id="frmDrug">
                     {{ csrf_field() }}
 
+                    @foreach ($errors->all() as $error)
+                        <p class="error">{{ $error }}</p>
+                    @endforeach
+
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                     </div>
-                    <div class="form-group">
+                    {{--<div class="form-group">
                         <input type="number" class="form-control" id="current_stock" name="current_stock" placeholder="Current Stock">
                     </div>
-                   {{-- <div class="form-group">
+                   --}}{{-- <div class="form-group">
                         <input type="number" class="form-control" id="total_stock" name="total_stock" placeholder="Total Stock">
-                    </div>--}}
+                    </div>--}}{{--
                     <div class="form-group">
                         <input type="number" class="form-control" id="used_stock" name="used_stock" placeholder="Used Stock">
                     </div>
                     <div class="form-group">
                         <input type="date" class="form-control" id="date_received" name="date_received" placeholder="Date Received">
                     </div>
-
+--}}
                          <input type="hidden" name="id" id="id" value="">
             <div class="modal-footer">
                 <input type="submit" value="Save" id="save" class="btn btn-primary">

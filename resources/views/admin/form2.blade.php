@@ -26,6 +26,18 @@
             <div class="row">
 
                 <div class="panel-body">
+                    @if ($errors->has())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br>
+                            @endforeach
+                        </div>
+                    @endif
+                        @if(session('message'))
+                            <div class="alert alert-success">
+                            {{session('message')}}
+                                </div>
+                        @endif
                     <form role="form" method="post" action="{{ URL::route('mapping') }}">
                         {{ csrf_field() }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -39,10 +51,35 @@
                         </div>
                         <div class="form-group">
                             <label>Drugs</label><br>
-                            @foreach($drugs as $key=>$drug)
+                            <table class="table  table-bordered table-hover" id="table">
+                                <thead>
+                                <tr>
+
+                                </tr>
+                                </thead>
+                            @foreach ($drugs->chunk(3) as $chunk)
+                                <tr>
+                                <td>
+                                    <div class="row">
+                                    @foreach ($chunk as $drug)
+
+
+                                        <div class="col-xs-4">
+                                            <input type="hidden" name="drug[]" value="0" />
+                                            <input class="checkbox-inline" type="checkbox" name="drug[]" value="{{ $drug->id }}" id="{{ $drug->id }}">{{ $drug->name }} <br>
+                                        </div>
+
+
+                                    @endforeach
+                                </div>
+                        </td>
+                        </tr>
+                            @endforeach
+                            </table>
+                            {{--@foreach($drugs as $key=>$drug)
                                 <input type="hidden" name="drug[]" value="0" />
                                 <input class="checkbox-inline" type="checkbox" name="drug[]" value="{{ $drug->id }}" id="{{ $drug->id }}">{{ $drug->name }} <br>
-                            @endforeach
+                            @endforeach--}}
 
                         </div>
                         <div class="form-group">

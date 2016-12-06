@@ -124,9 +124,20 @@
                     else{
                         $('#item'+data.id).replaceWith(row);
                     }
+
                     $('#frmDisease').trigger('reset');
                     $('#name').focus();
-                }
+                    alert('Disease Created Successfully');
+                    window.location.reload();
+
+
+        },
+            error: function(data){
+                var errors = data.parseJSON;
+                console.log(errors);
+                alert('Disease already exists');
+                // Render the errors with js ...
+            }
             });
         })
         function addRow(data) {
@@ -152,6 +163,7 @@
                     $('#name').val(data.name);
                     $('#save').val('update');
                     $('#item').modal('show');
+                   /* window.location.reload();*/
                 }
             });
         });
@@ -165,7 +177,9 @@
                     url:url,
                     data:{'id':value},
                     success:function(data){
+                        alert('Disease has been deleted');
                         $('#item'+value).remove();
+                        window.location.reload();
                     }
                 });
             }
@@ -180,7 +194,10 @@
                     $('tbody').html(data);
                 }
             });
-        })
+        });
+        /*$(document).ajaxStop(function(){
+            window.location.reload();
+        });*/
     </script>
     </body>
     </html>

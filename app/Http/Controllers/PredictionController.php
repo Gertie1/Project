@@ -69,6 +69,7 @@ class PredictionController extends Controller
 
         foreach ( $featureNames as $feature ) {
             array_push ( $featureNamesArray, $feature->feature );
+
         }
 
 

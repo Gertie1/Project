@@ -15,32 +15,40 @@
                 <form action="{{ URL::route('newDrug') }}" method="post" id="frmDrug">
                     {{ csrf_field() }}
 
-                    @foreach ($errors->all() as $error)
-                        <p class="error">{{ $error }}</p>
-                    @endforeach
+                    {{--<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                    <div class="form-group">
+                        <div class="col-md-6">
+                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>--}}
+
+                    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}" id="error">
                         <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                        @endif
                     </div>
-                    {{--<div class="form-group">
-                        <input type="number" class="form-control" id="current_stock" name="current_stock" placeholder="Current Stock">
-                    </div>
-                   --}}{{-- <div class="form-group">
-                        <input type="number" class="form-control" id="total_stock" name="total_stock" placeholder="Total Stock">
-                    </div>--}}{{--
-                    <div class="form-group">
-                        <input type="number" class="form-control" id="used_stock" name="used_stock" placeholder="Used Stock">
-                    </div>
-                    <div class="form-group">
-                        <input type="date" class="form-control" id="date_received" name="date_received" placeholder="Date Received">
-                    </div>
---}}
+
+
                          <input type="hidden" name="id" id="id" value="">
             <div class="modal-footer">
                 <input type="submit" value="Save" id="save" class="btn btn-primary">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
              </div>
+
+
                  </form>
+
 
             </div>
         </div>

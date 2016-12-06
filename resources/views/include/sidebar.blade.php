@@ -54,7 +54,7 @@
                 <a href="{!! URL::route('display') !!}"><i class="fa fa-table fa-fw"></i>Display</a>
             </li>
             <li>
-                <a href="{!! URL::route('charts') !!}"><i class="fa fa-table fa-fw"></i>Charts</a>
+                <a href="{!! URL::route('blank') !!}"><i class="fa fa-table fa-fw"></i>Charts</a>
             </li>
             <li>
                 <a href="{!! URL::route('stock') !!}"><i class="fa fa-table fa-fw"></i>Stock</a>

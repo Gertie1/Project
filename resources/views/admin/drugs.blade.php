@@ -43,22 +43,22 @@
                     <div class="panel-body">
                         <div class="form-group">
                             <form action="#" method="get" id="frmsearch">
-                            <input type="text" class="form-control" id="search" name="search" placeholder="Search">
-                            {{--<button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-search"></i></button>--}}
+                                <input type="text" class="form-control" id="search" name="search" placeholder="Search">
+                                {{--<button class="btn btn-default" type="submit"> <i class="glyphicon glyphicon-search"></i></button>--}}
                             </form>
 
                         </div>
                         <div class="table-responsive">
-                         @include('admin.newDrug')
+                            @include('admin.newDrug')
                             <table class="table table-striped table-bordered table-hover" id="table">
                                 <thead>
                                 <tr>
                                     <th class="text-center">#</th>
                                     <th class="text-center">Name</th>
-                                   {{-- <th class="text-center">Current Stock</th>
-                                    --}}{{--<th class="text-center">Total Stock</th>--}}{{--
-                                    <th class="text-center">Used Stock</th>
-                                    <th class="text-center">Date Received</th>--}}
+                                    {{-- <th class="text-center">Current Stock</th>
+                                     --}}{{--<th class="text-center">Total Stock</th>--}}{{--
+                                     <th class="text-center">Used Stock</th>
+                                     <th class="text-center">Date Received</th>--}}
                                     <th class="text-center">Actions</th>
                                 </tr>
                                 </thead>
@@ -100,8 +100,8 @@
         });
 
         $("#add").on('click', function () {
-            $('#save').val('save');
-            $('#frmDrug').trigger('reset');
+          /*  $('#save').val('save');
+            $('#frmDrug').trigger('reset');*/
             $("#item").modal('show');
         });
 
@@ -125,34 +125,36 @@
                             '<td>'+ data.id +'</td>' +
                             '<td>'+ data.name +'</td>' +
                             /*'<td>'+ data.current_stock +'</td>' +
-                            /!*'<td>'+ data.total_stock +'</td>' +*!/
-                            '<td>'+ data.used_stock +'</td>' +
-                            '<td>'+ data.date_received +'</td>' +*/
+                             /!*'<td>'+ data.total_stock +'</td>' +*!/
+                             '<td>'+ data.used_stock +'</td>' +
+                             '<td>'+ data.date_received +'</td>' +*/
                             '<td><button class="edit-modal btn btn-info btn-edit" data-id="'+ data.id +'">Edit</button>'+
                             '<button class="delete-modal btn btn-danger btn-delete" data-id="'+ data.id+'">Delete</button></td>' +
                             '</tr>';
+
                     if(state=='save'){
+
                         $('tbody').append(row);
                     }
                     else{
+
                         $('#item'+data.id).replaceWith(row);
                     }
 
 
                     $('#frmDrug').trigger('reset');
                     $('#name').focus();
+                    /*alert('Drug Created Successfully');*/
+
+                    alert('Drug Created Successfully');
+
+
                 },
                 error: function(data){
-                    /*var errors = data.responseJSON;*/
-                    var errors = $.parseJSON(data.responseText);
+                    var errors = data.parseJSON;
                     console.log(errors);
+                    alert('Drug already exists');
                     // Render the errors with js ...
-                    $.each(errors, function(index, value) {
-                        $.gritter.add({
-                            title: 'Error',
-                            text: value
-                        });
-                    });
                 }
 
             });
@@ -163,9 +165,9 @@
                     '<td>'+ data.id +'</td>' +
                     '<td>'+ data.name +'</td>' +
                     /*'<td>'+ data.current_stock +'</td>' +
-                   /!* '<td>'+ data.total_stock +'</td>' +*!/
-                    '<td>'+ data.used_stock +'</td>' +
-                    '<td>'+ data.date_received +'</td>' +*/
+                     /!* '<td>'+ data.total_stock +'</td>' +*!/
+                     '<td>'+ data.used_stock +'</td>' +
+                     '<td>'+ data.date_received +'</td>' +*/
                     '<td><button class="edit-modal btn btn-info btn-edit">Edit</button>'+
                     '<button class="delete-modal btn btn-danger btn-delete">Delete</button></td>' +
                     '</tr>';
@@ -184,10 +186,10 @@
                     console.log(data);
                     $('#id').val(data.id);
                     $('#name').val(data.name);
-                   /* $('#current_stock').val(data.current_stock);
-                    /!*$('#total_stock').val(data.total_stock);*!/
-                    $('#used_stock').val(data.used_stock);
-                    $('#date_received').val(data.date_received);*/
+                    /* $('#current_stock').val(data.current_stock);
+                     /!*$('#total_stock').val(data.total_stock);*!/
+                     $('#used_stock').val(data.used_stock);
+                     $('#date_received').val(data.date_received);*/
                     $('#save').val('update');
                     $('#item').modal('show');
 
@@ -206,8 +208,10 @@
                     url:url,
                     data:{'id':value},
                     success:function(data){
-                        $('#item'+value).remove();
+                        alert('Drug has been deleted');
                         console.log('Successfully deleted');
+                        $('#item'+value).remove();
+
                     }
 
                 });
@@ -217,17 +221,17 @@
         $('#search').on('keyup',function(){
             $value=$(this).val();
             $.ajax({
-               type:'get',
+                type:'get',
                 url:'{{URL::to('searchDrug')}}',
                 data:{'search':$value},
                 success:function (data) {
                     $('tbody').html(data);
-                    
+
                 }
             });
         })
 
-        
+
     </script>
     </body>
     </html>

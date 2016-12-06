@@ -38,33 +38,41 @@
 
                     {{ csrf_field() }}
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <div class="row">
                     <div class="form-group">
                         <label>Disease</label>
                         <select class="form-inline input-sm " name="disease" id="disease">
                             <option value="{{$disease->id}}"> {{$disease->name}}</option>
-                           {{-- @foreach($diseases as $key => $disease)
-                                <option value="{{$disease->id}}"> {{$disease->name}}</option>
-                            @endforeach--}}
+                            {{-- @foreach($diseases as $key => $disease)
+                                 <option value="{{$disease->id}}"> {{$disease->name}}</option>
+                             @endforeach--}}
                         </select>
                     </div>
+                        </div>
+                    <div class="row">
                     <div class="form-group">
                         <label>Drugs</label><br>
                         @foreach($drugs as $key=>$drug)
+                            <div class="col-xs-4">
                             <input type="hidden" name="drug[]" value="0" />
-
                             <input class="checkbox-inline" type="checkbox" name="drug[]" value="{{ $drug->id }}" id="{{ $drug->id }}"
                                    @foreach($checked_drugs as $key=>$checked_drug)
                                    @if ($checked_drug == $drug->id)
                                    checked
-                                   @endif
+                                    @endif
                                     @endforeach
                             >{{ $drug->name }} <br>
+                                </div>
                         @endforeach
 
                     </div>
+                        </div>
+                    <br> <br>
+                    <div class="row">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+                        </div>
 
                     </form>
                 </div>

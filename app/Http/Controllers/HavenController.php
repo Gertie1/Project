@@ -34,11 +34,6 @@ class HavenController extends Controller
         $this->data = $response;
     }
 
-    function requestCompletedWithJobId($response)
-    {
-        $jobID = $response;
-    }
-
     function init()
     {
         $serviceName = 'carsService';
@@ -70,6 +65,11 @@ class HavenController extends Controller
         return view('admin.trial')
             ->with($this->data);
 
+    }
+
+    public function requestCompletedWithJobId($response)
+    {
+        $jobID = $response;
     }
 
 }

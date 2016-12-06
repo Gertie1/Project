@@ -27,7 +27,7 @@ class StockController extends Controller
 
 
         return view('admin.stock')
-        ->with('stocks', $stocks);
+            ->with('stocks', $stocks);
 
 
         /*$display = DB::table('diseases_drugs')
@@ -51,32 +51,67 @@ class StockController extends Controller
 
     public function addNewStock(Request $request)
     {
-   /*    $input = Input::all();
-        $drug = $request->drug('drug');
-        $amount_received = $request->drug('amount_received');*/
+        /*    $input = Input::all();
+             $drug = $request->drug('drug');
+             $amount_received = $request->drug('amount_received');*/
 
 
         $stock = count($request['drug']);
 
-     $insert = array();
-        for($i=0; $i<$stock; $i++){
-            if(!empty($request['drug'][$i])){
-                array_push($insert, array( // iterate through each entry and create an array of inputs
+        $insert = array();
+        $rules = array(
+            'drug_id'             => 'required',                        // just a normal required validation
+            'date_received' => 'required',           // required and has to match the password field
+            'date_sold' => 'required',
+            'amount_received' => 'required|greater_than_field:amount_sold',
+            'amount_sold' => 'required'
+
+        );
+        $messages = [
+            'required' => 'The :attribute field is required.',
+            'amount_received.greater_than_field'=>'You cannot sell more than what you received'
+        ];
 
 
-                    'drug_id' => $request['drug'][$i],
-                    'amount_received' => $request['amount_received'][$i],
-                    'amount_sold' => $request['amount_sold'][$i],
-                    'date_received' => $request['date_received'][$i],
-                    'date_sold' => $request['date_sold'][$i],
-                    'amount_remaining' => ($request['amount_received'][$i]) - ($request['amount_sold'][$i]),
+            for ($i = 0; $i < $stock; $i++) {
+                if (!empty($request['drug'][$i])) {
+                    array_push($insert, array( // iterate through each entry and create an array of inputs
 
-                ));
+
+                        'drug_id' => $request['drug'][$i],
+                        'amount_received' => $request['amount_received'][$i],
+                        'amount_sold' => $request['amount_sold'][$i],
+                        'date_received' => $request['date_received'][$i],
+                        'date_sold' => $request['date_sold'][$i],
+                        'amount_remaining' => ($request['amount_received'][$i]) - ($request['amount_sold'][$i]),
+
+                    ));
+
+                }
+
             }
+
+            foreach ($insert as $key){
+        // do the validation ----------------------------------
+        // validate against the inputs from our form
+        $validator = \Validator::make($key, $rules,$messages);
+
+        // check if the validator failed -----------------------
+        if ($validator->fails()) {
+
+            // get the error messages from the validator
+            $messages = $validator->messages();
+
+            // redirect our user back to the form with the errors from the validator
+            return \Redirect::to('stockr')
+                ->withErrors($messages)
+                ->withInput();
+
+
         }
+            }
         Stock::insert($insert);
-
-
+        return redirect('stock');
     }
 
     public function deleteStock(Request $request)
@@ -130,8 +165,8 @@ class StockController extends Controller
         $date_received = $item['date_received'];
         $date_sold = $item['date_sold'];
 
-    /*    $drugs_arr = explode(",",$item['drug_id'] );
-        $drugs = DB::table('drugs')->select('id', 'name')->get();*/
+        /*    $drugs_arr = explode(",",$item['drug_id'] );
+            $drugs = DB::table('drugs')->select('id', 'name')->get();*/
 
         return view('admin.stocke')
             ->with(['item' => $item, 'drug' => $drug, 'amount_received' => $amount_received, 'amount_sold' => $amount_sold, 'date_received' => $date_received, 'date_sold' => $date_sold, ]);
@@ -144,7 +179,7 @@ class StockController extends Controller
 
     public function updateStock($id, Request $request)
     {
-       /* $item = Stock::findOrFail($id);*/
+        /* $item = Stock::findOrFail($id);*/
         /*$string = implode(",", $request->get('drug'));
         $input = [
             'drug_id' => $string,

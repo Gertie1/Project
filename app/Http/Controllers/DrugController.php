@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Drug;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Input;
 
 class DrugController extends Controller
 {
@@ -26,14 +28,33 @@ class DrugController extends Controller
 
     public function newDrug(Request $request){
         if($request->ajax()){
-            $this->validate($request,array(
-                'name'=>'required'
-            ));
+
+            $validation = \Validator::make( Input::all(), [
+                'name' => 'required|unique:drugs',
+            ]);
+
+            if( $validation->fails() )
+            {
+                $errors = $validation->errors();
+                $errors =  json_decode($errors);
+
+                return response()->json([
+                    'success' => false,
+                    'message' => $errors
+                ], 422);
+            }
 
             $item = Drug::create($request->all());
             $item->save();
-            Session::flash("success","Created");
             return response()->json($item);
+
+
+           /* $request->session()->flash('message', 'New Drug added successfully.');
+            $request->session()->flash('message-type', 'success');
+            return response()
+                ->json($item,$validation,['status'=>'Hooray','success' => '0', 'error' => 'Your Flash Message']);*/
+
+
         }
     }
 
@@ -84,10 +105,10 @@ class DrugController extends Controller
                     $output.='<tr>'.
                              '<td>'. $item->id.'</td>'.
                              '<td>'. $item->name.'</td>'.
-                             '<td>'. $item->current_stock.'</td>'.
+                             /*'<td>'. $item->current_stock.'</td>'.
                              '<td>'. $item->total_stock.'</td>'.
                              '<td>'. $item->used_stock.'</td>'.
-                             '<td>'. $item->date_received.'</td>'.
+                             '<td>'. $item->date_received.'</td>'.*/
                              '<td><button class="edit-modal btn btn-info btn-edit" data-id="'.$item->id.'">Edit</button>
                              <button class="delete-modal btn btn-danger btn-delete" data-id="'.$item->id.'">Delete</button></td>'.
 

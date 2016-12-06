@@ -26,6 +26,13 @@
             <div class="row">
 
                 <div class="panel-body col-lg-11">
+                    @if ($errors->has())
+                        <div class="alert alert-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br>
+                            @endforeach
+                        </div>
+                    @endif
                     <form role="form" method="post" action="{{ URL::route('newStock') }}" id="addstock">
                         {{ csrf_field() }}
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -42,20 +49,20 @@
                             </tr>
                             </thead>
                             <tr>
-                        <div class="form-group">
-                            <td>
-
-                            <select class="form-inline input-sm " name="drug[]" id="drug">
-                                @foreach($drugs as $key => $drug)
-                                    <option value="{{$drug->id}}"> {{$drug->name}}</option>
-                                @endforeach
-                            </select>
-                            </td>
-                        </div>
-                                <td>
                                 <div class="form-group">
-                                    <input class="input-sm" type="number" class="form-control" id="amount_received" name="amount_received[]"  placeholder="Amount received">
+                                    <td>
+
+                                        <select class="form-inline input-sm " name="drug[]" id="drug">
+                                            @foreach($drugs as $key => $drug)
+                                                <option value="{{$drug->id}}"> {{$drug->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
                                 </div>
+                                <td>
+                                    <div class="form-group">
+                                        <input class="input-sm" type="number" class="form-control" id="amount_received" name="amount_received[]"  placeholder="Amount received">
+                                    </div>
                                 </td>
 
                                 <td>
@@ -75,15 +82,15 @@
                                     </div>
                                 </td>
 
-                            <td>
-                                <button type="button" name="add" id="add">Add More</button>
-                            </td>
+                                <td>
+                                    <button type="button" name="add" id="add">Add More</button>
+                                </td>
                             </tr>
-                            </table>
+                        </table>
 
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary" id="submit">Submit</button>
-                                </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                        </div>
 
 
                     </form>
@@ -109,17 +116,17 @@
             $('#add').click(function () {
                 i++;
                 $('#table').append('<tr id="row'+i+'"><div class="form-group"><td><select class="form-inline input-sm " name="drug[]" id="drug"> @foreach($drugs as $key => $drug)
-                        <option value="{{$drug->id}}"> {{$drug->name}}</option> @endforeach
-                        </select></td></div><td><div class="form-group"><input class="input-sm" type="number" class="form-control" id="amount_received" name="amount_received[]" placeholder="Amount received"></div></td><td><div class="form-group"> <input class="input-sm" type="number" class="form-control" id="amount_sold" name="amount_sold[]"  placeholder="Amount sold"> </div> </td> <td> <div class="form-group"> <input class="input-sm" type="date" class="form-control" id="date_received" name="date_received[]"  placeholder="Date received"> </div> </td> <td> <div class="form-group"> <input class="input-sm" type="date" class="form-control" id="date_sold" name="date_sold[]"  placeholder="Date sold"> </div></td><td><button name="remove" id="'+i+'" class="btn btn-danger btn-remove">X</button></td></tr>');
-                
+                                <option value="{{$drug->id}}"> {{$drug->name}}</option> @endforeach
+                                </select></td></div><td><div class="form-group"><input class="input-sm" type="number" class="form-control" id="amount_received" name="amount_received[]" placeholder="Amount received"></div></td><td><div class="form-group"> <input class="input-sm" type="number" class="form-control" id="amount_sold" name="amount_sold[]"  placeholder="Amount sold"> </div> </td> <td> <div class="form-group"> <input class="input-sm" type="date" class="form-control" id="date_received" name="date_received[]"  placeholder="Date received"> </div> </td> <td> <div class="form-group"> <input class="input-sm" type="date" class="form-control" id="date_sold" name="date_sold[]"  placeholder="Date sold"> </div></td><td><button name="remove" id="'+i+'" class="btn btn-danger btn-remove">X</button></td></tr>');
+
             });
             $(document).on('click','.btn-remove',function () {
                 var button_id = $(this).attr("id");
                 $("#row"+button_id+"").remove();
-                
+
             });
 
-            
+
         });
 
     </script>

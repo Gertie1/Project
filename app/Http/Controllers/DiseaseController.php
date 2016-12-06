@@ -6,6 +6,7 @@ use App\Disease;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Input;
 
 class DiseaseController extends Controller
 {
@@ -16,6 +17,20 @@ class DiseaseController extends Controller
 
     public function newDisease(Request $request){
         if($request->ajax()){
+            $validation = \Validator::make( Input::all(), [
+                'name' => 'required|unique:diseases',
+            ]);
+
+            if( $validation->fails() )
+            {
+                $errors = $validation->errors();
+                $errors =  json_decode($errors);
+
+                return response()->json([
+                    'success' => false,
+                    'message' => $errors
+                ], 422);
+            }
             $item = Disease::create($request->all());
             $item->save();
             return response()->json($item);

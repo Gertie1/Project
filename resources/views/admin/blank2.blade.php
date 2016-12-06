@@ -25,14 +25,14 @@
         {{-- <?php echo json_encode($chartArray); ?>--}}
 
     </div>
-      <script>
+     {{-- <script>
           $(function() {
               $('#container').highcharts(
                       <?php echo json_encode($chartArray); ?>
               )
           });
 
-      </script>
+      </script>--}}
 
 
 
